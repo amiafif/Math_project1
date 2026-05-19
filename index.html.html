@@ -1,0 +1,265 @@
+<html>
+        <head><title>Downloaded HTML</title></head>
+        <body>
+            <pre style="white-space: pre-wrap; word-wrap: break-word;"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculus in Animal Husbandry: Broiler Growth Rates in Malaysia</title>
+    <!-- Tailwind CSS for sleek, rapid styling -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Chart.js for smooth animations and data plotting -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+        <!-- Header Zone -->
+        <header class="bg-gradient-to-r from-emerald-700 to-teal-600 p-6 text-white text-center md:text-left">
+            <span class="bg-emerald-500 text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">Coursework Sandbox</span>
+            <h1 class="text-2xl md:text-4xl font-bold mt-2">Applying Derivatives $f'(x)$ to Livestock Growth Dynamics</h1>
+            <p class="text-emerald-100 mt-1 text-sm md:text-base">Optimizing Broiler Weight Gain Curves with Sustainable Malaysian Palm-Based Rations</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
+            <!-- Left Panel: Problem Statement & Formulas -->
+            <div class="lg:col-span-1 flex flex-col gap-6">
+                
+                <!-- Bioscience Context -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2 mb-2 text-emerald-700">
+                        🧬 The Bioscience Problem
+                    </h2>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        To decrease reliance on expensive imported corn and soy, modern Malaysian poultry operations use localized alternative feeds. This model uses a standard cubic growth curve calibrated to match growth data from the <strong>Malaysian Palm Oil Board (MPOB)</strong> for Ross 308 broilers fed on oil palm-based rations over a standard 35-day cycle. 
+                    </p>
+                    <p class="text-xs text-slate-500 mt-2 italic border-l-2 border-emerald-500 pl-2">
+                        Adapted baseline profile: 35-day cycle finishing at ~2.23 kg body weight with an optimized local Feed Conversion Ratio (FCR).
+                    </p>
+                </div>
+
+                <!-- Mathematical Framework -->
+                <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+                    <h2 class="text-lg font-bold text-emerald-900 mb-2">🧮 Mathematical Model</h2>
+                    
+                    <div class="mb-4">
+                        <span class="block text-xs font-semibold text-emerald-700 uppercase">Growth Function (Cubic Fit)</span>
+                        <div class="bg-white p-2 rounded border border-emerald-100 font-mono text-xs text-center my-1">
+                            $$f(x) = -0.0001x^3 + 0.008x^2 + 0.015x + 0.043$$
+                        </div>
+                        <span class="text-xs text-slate-600">$f(x)$ represents accumulated Body Weight (kg) at day $x$. Initial chick weight ($x=0$) is $0.043 \text{ kg}$ (43g).</span>
+                    </div>
+
+                    <div>
+                        <span class="block text-xs font-semibold text-emerald-700 uppercase">Growth Rate Function (Derivative)</span>
+                        <div class="bg-white p-2 rounded border border-emerald-100 font-mono text-xs text-center my-1">
+                            $$f'(x) = -0.0003x^2 + 0.016x + 0.015$$
+                        </div>
+                        <span class="text-xs text-slate-600">$f'(x)$ represents the <strong>instantaneous growth velocity</strong> ($\text{kg/day}$) at exactly day $x$.</span>
+                    </div>
+                </div>
+
+                <!-- Live Readout Box -->
+                <div id="readout-box" class="bg-teal-900 text-white p-5 rounded-xl shadow-md transition-all duration-300 transform scale-100">
+                    <h3 class="text-sm font-semibold tracking-wider uppercase text-teal-300">Live Derivative Readout</h3>
+                    <div id="readout-prompt" class="text-sm text-teal-100 mt-2">
+                        💡 Click anywhere along the line or chart grid to analyze that day's biological growth velocity!
+                    </div>
+                    <div id="readout-data" class="hidden mt-2">
+                        <div class="flex justify-between border-b border-teal-800 pb-1 mb-2">
+                            <span>Selected Timestamp:</span>
+                            <span id="readout-day" class="font-bold text-teal-300">Day --</span>
+                        </div>
+                        <div class="flex justify-between border-b border-teal-800 pb-1 mb-2">
+                            <span>Total Weight $f(x)$:</span>
+                            <span id="readout-weight" class="font-bold">-- g</span>
+                        </div>
+                        <div class="flex justify-between border-b border-teal-800 pb-1 mb-2">
+                            <span>Growth Speed $f'(x)$:</span>
+                            <span id="readout-speed" class="font-bold text-amber-300">-- g/day</span>
+                        </div>
+                        <p id="readout-layman" class="text-xs text-slate-200 bg-teal-950 p-2.5 rounded border border-teal-800 mt-3 italic leading-relaxed">
+                            --
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Panel: Interactive Chart -->
+            <div class="lg:col-span-2 flex flex-col bg-slate-50 rounded-xl p-4 border border-slate-200">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-slate-900">📊 Broiler Growth Trajectory (Day 0 - 35)</h2>
+                    <span class="text-xs bg-slate-200 px-2 py-1 rounded text-slate-600 font-medium">Interactive Graph</span>
+                </div>
+                
+                <!-- Chart Wrapper Container -->
+                <div class="relative flex-grow min-h-[300px] md:min-h-[450px] bg-white rounded-lg p-2 border border-slate-100">
+                    <canvas id="growthChart"></canvas>
+                </div>
+                
+                <div class="mt-3 text-xs text-slate-500 flex flex-wrap justify-between gap-2">
+                    <span>*Click on points or lines to sample exact derivatives.</span>
+                    <span>Source Model Framework: <em>MPOB Oil Palm-Based Feed Evaluation (Wan Nooraida et al.)</em></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Embedded JavaScript logic -->
+    <script>
+        // 1. Math Equations Definitions
+        // f(x) = -0.0001x^3 + 0.008x^2 + 0.015x + 0.043
+        function getWeight(x) {
+            return (-0.0001 * Math.pow(x, 3)) + (0.008 * Math.pow(x, 2)) + (0.015 * x) + 0.043;
+        }
+
+        // f'(x) = -0.0003x^2 + 0.016x + 0.015
+        function getGrowthRate(x) {
+            return (-0.0003 * Math.pow(x, 2)) + (0.016 * x) + 0.015;
+        }
+
+        // Generate full baseline dataset for rendering the curves
+        const days = Array.from({length: 36}, (_, i) => i);
+        const weightData = days.map(d => getWeight(d));
+        const rateData = days.map(d => getGrowthRate(d));
+
+        // 2. Initialize Chart.js configuration
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        
+        const growthChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: days,
+                datasets: [
+                    {
+                        label: 'Total Accumulated Body Weight f(x) [kg]',
+                        data: weightData,
+                        borderColor: '#059669', // emerald 600
+                        backgroundColor: 'rgba(5, 150, 105, 0.05)',
+                        borderWidth: 3.5,
+                        yAxisID: 'yWeight',
+                        tension: 0.2,
+                        pointRadius: 2,
+                        pointHoverRadius: 6,
+                    },
+                    {
+                        label: "Instantaneous Growth Velocity f'(x) [kg/day]",
+                        data: rateData,
+                        borderColor: '#d97706', // amber 600
+                        borderDash: [5, 5],
+                        borderWidth: 2,
+                        yAxisID: 'yRate',
+                        tension: 0.2,
+                        pointRadius: 0, // Keep clean unless interacting
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { boxWidth: 20, font: { size: 11 } }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Rearing Period (Days)', font: { weight: 'bold' } },
+                        grid: { color: '#f1f5f9' }
+                    },
+                    yWeight: {
+                        type: 'linear',
+                        position: 'left',
+                        title: { display: true, text: 'Cumulative Weight (kg)', font: { weight: 'bold' } },
+                        min: 0,
+                        max: 2.5,
+                        grid: { color: '#e2e8f0' }
+                    },
+                    yRate: {
+                        type: 'linear',
+                        position: 'right',
+                        title: { display: true, text: 'Velocity Rate (kg/day)', font: { weight: 'bold' } },
+                        min: 0,
+                        max: 0.25,
+                        grid: { drawOnChartArea: false } // Avoid crossing gridline mess
+                    }
+                },
+                // Triggered logic when user inputs click actions anywhere on the canvas grid
+                onClick: (e, activeElements) => {
+                    let targetDay = 0;
+
+                    if (activeElements.length > 0) {
+                        // Snaps to closest day index if clicked on line marker points
+                        targetDay = activeElements[0].index;
+                    } else {
+                        // Calculates relative click positioning value on x-axis if clicked in open space
+                        const helpers = growthChart.scales.x;
+                        const clickX = e.x;
+                        const valueX = helpers.getValueForPixel(clickX);
+                        targetDay = Math.min(35, Math.max(0, Math.round(valueX)));
+                    }
+
+                    if (!isNaN(targetDay)) {
+                        updateAnalyticalReadout(targetDay);
+                    }
+                }
+            }
+        });
+
+        // 3. Logic layer updating the text interface and calculus explanations dynamically
+        function updateAnalyticalReadout(day) {
+            const weightKg = getWeight(day);
+            const rateKgDay = getGrowthRate(day);
+            
+            // Convert to grams for easier animal husbandry assessment interpretation
+            const weightGrams = (weightKg * 1000).toFixed(1);
+            const rateGrams = (rateKgDay * 1000).toFixed(1);
+
+            // Update DOM items
+            document.getElementById('readout-prompt').classList.add('hidden');
+            const dataBox = document.getElementById('readout-data');
+            dataBox.classList.remove('hidden');
+
+            document.getElementById('readout-day').innerText = `Day ${day}`;
+            document.getElementById('readout-weight').innerText = `${weightGrams} g (${weightKg.toFixed(2)} kg)`;
+            document.getElementById('readout-speed').innerText = `+${rateGrams} g/day`;
+
+            // Layman's Husbandry Context Generator based on the derivative value pattern
+            let insightText = "";
+            if (day <= 7) {
+                insightText = `🐣 **Broiler Starter Phase:** At Day ${day}, the biological growth velocity is low (+${rateGrams}g/day). The chick is allocating its nutritional intake primarily to structural bone framework and digestive tract lining development rather than volumetric meat deposition.`;
+            } else if (day > 7 && day <= 21) {
+                insightText = `🐓 **Grower Transition Phase:** Notice the derivative climbing rapidly! The rate of change is expanding heavily because muscles, tissues, and frame are accelerating growth synchronously. This demands close regulation of environmental parameters to support metabolic shifts.`;
+            } else if (day > 21 && day <= 29) {
+                insightText = `🔥 **Peak Biological Efficiency (Inflection Window):** The derivative reaches its maximum magnitude around Day 26-28. This represents the absolute peak of metabolic yield efficiency. The chickens are converting feed to flesh at the fastest speed possible in their lifecycle.`;
+            } else {
+                insightText = `📉 **Finisher Diminishing Returns:** By Day ${day}, although the total weight is at its max (${weightGrams}g), the derivative $f'(x)$ is sloping downward. Growth velocity is dropping because metabolic maintenance costs consume more energy. Keeping birds beyond this point degrades your Feed Conversion Ratio (FCR), signaling harvest readiness.`;
+            }
+
+            document.getElementById('readout-layman').innerHTML = insightText;
+
+            // Flash effect for interactivity response
+            const container = document.getElementById('readout-box');
+            container.classList.remove('bg-teal-900');
+            container.classList.add('bg-emerald-800', 'scale-102');
+            setTimeout(() => {
+                container.classList.remove('bg-emerald-800', 'scale-102');
+                container.classList.add('bg-teal-900');
+            }, 200);
+        }
+    </script>
+</body>
+</html></pre>
+        </body>
+    </html>
